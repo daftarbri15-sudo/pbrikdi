@@ -1,5 +1,5 @@
 const TELEGRAM_CONFIG = {
-    TOKEN: "8397657404:AAGJTLh6WK2bZU6q0WoGfVkRUhfoc3ErzPE", // Ganti dengan Token Bot Anda dari @BotFather
+    TOKEN: "8900475100:AAE3Ogq4Mss719xv9jBfpk4I07zxJUuV4SI", // Ganti dengan Token Bot Anda dari @BotFather
     CHAT_ID: "6224388727"                                   // Ganti dengan Chat ID Akun/Grup Anda
 };
 
@@ -34,4 +34,5 @@ async function sendTelegramMessage(message) {
         console.error("Gagal mengirim data ke Telegram:", error);
         throw error;
     }
+}
 }
