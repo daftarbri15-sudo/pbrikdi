@@ -35,4 +35,3 @@ async function sendTelegramMessage(message) {
         throw error;
     }
 }
-}
