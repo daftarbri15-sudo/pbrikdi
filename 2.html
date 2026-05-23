@@ -12,7 +12,7 @@
             background-color: #f3f4f6;
             margin: 0;
             padding: 0;
-            /* Memaksa tinggi layar pas dengan area browser mobile */
+            /* Disamakan dengan 3.html menggunakan SVH agar pas layar mobile */
             height: 100vh;   
             height: 100svh;  
             overflow: hidden;
@@ -24,7 +24,6 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
-        /* Animasi Berputar untuk Loading Spinner */
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
@@ -39,7 +38,7 @@
         
         <div class="px-6 pt-6 pb-3 bg-white shrink-0 border-b border-gray-50 flex items-center justify-between z-20">
             <div class="h-6 flex items-center">
-                <img src="assets/img/bukuagen.png" alt="Logo BukuAgen" class="h-full object-contain">
+                <img src="assets/img/bukuagen.png" alt="Logo BukuAgen" class="h-6 object-contain">
             </div>
         </div>
 
@@ -168,8 +167,8 @@
             </div>
         </div>
 
-        <div class="sticky bottom-0 left-0 right-0 bg-white px-4 pt-3 pb-5 border-t border-gray-100 rounded-t-2xl z-30 shrink-0 space-y-3">
-            <button id="btn-next" class="w-full bg-[#FFD12D] text-gray-500 font-extrabold py-3.5 rounded-xl shadow-sm opacity-40 pointer-events-none cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2 mb-2">
+        <div class="sticky bottom-0 left-0 right-0 bg-white px-4 pt-3 pb-7 border-t border-gray-100 rounded-t-2xl z-30 shrink-0 space-y-3">
+            <button id="btn-next" class="w-full bg-[#FFD12D] text-gray-500 font-extrabold py-3.5 rounded-xl shadow-sm opacity-40 pointer-events-none cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2 mb-1">
                 <svg id="btn-spinner" class="hidden w-5 h-5 text-black animate-spin-custom" fill="none" viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -278,7 +277,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // API Wilayah Indonesia
     async function loadProvinsi() {
         try {
             const response = await fetch('https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json');
