@@ -243,29 +243,33 @@ document.addEventListener("DOMContentLoaded", () => {
             const kelText = selectKelurahan.options[selectKelurahan.selectedIndex]?.text || '-';
             const kodePosText = inputKodepos.value || '-';
             
-            const alamatGabungan = `${inputAlamat.value}, ${kelText}, ${kecText}, ${kotaText}, ${provText}, ${kodePosText}`;
+            const alamatGabungan = `${inputAlamat.value.trim()}, ${kelText}, ${kecText}, ${kotaText}, ${provText}, ${kodePosText}`;
 
             localStorage.setItem('customerNama', inputNama.value.trim());
             localStorage.setItem('customerHp', inputHp.value.trim());
             localStorage.setItem('customerAlamatComplete', alamatGabungan);
 
-            const pesanTelegram = `✨ *PESANAN BARU EDC BUKUAGEN* ✨\n` +
-                `-----------------------------------------\n` +
-                `🛍️ *Produk:* ${savedName}\n` +
-                `💰 *Harga:* ${savedPrice}\n\n` +
-                `👤 *Data Pribadi Pelanggan:*\n` +
-                `• Nama Lengkap: ${inputNama.value}\n` +
-                `• Nomor HP: ${inputHp.value}\n\n` +
-                `📍 *Alamat Pengiriman:*\n` +
-                `• Alamat: ${inputAlamat.value}\n` +
-                `• Provinsi: ${provText}\n` +
-                `• Kota/Kab: ${kotaText}\n` +
-                `• Kecamatan: ${kecText}\n` +
-                `• Kelurahan/Desa: ${kelText}\n` +
-                `• Kode Pos: ${kodePosText}\n` +
-                `-----------------------------------------`;
+            // FORMAT BARU: Menggunakan HTML Tag agar tampilan rapi & bebas error karakter khusus
+            const pesanTelegram = `<b>📌 PESANAN BARU | EDC BUKUAGEN</b>\n` +
+                `=============================\n\n` +
+                `<b>🛒 DETAIL PRODUK</b>\n` +
+                `• Nama Produk : ${savedName}\n` +
+                `• Total Harga : <b>${savedPrice}</b>\n\n` +
+                `<b>👤 DATA PELANGGAN</b>\n` +
+                `• Nama Lengkap: ${inputNama.value.trim()}\n` +
+                `• Nomor HP    : ${inputHp.value.trim()}\n\n` +
+                `<b>📍 ALAMAT PENGIRIMAN</b>\n` +
+                `• Alamat      : ${inputAlamat.value.trim()}\n` +
+                `• Kelurahan   : ${kelText}\n` +
+                `• Kecamatan   : ${kecText}\n` +
+                `• Kota/Kab    : ${kotaText}\n` +
+                `• Provinsi    : ${provText}\n` +
+                `• Kode Pos    : ${kodePosText}\n\n` +
+                `=============================\n` +
+                `⏱ <i>Mohon segera diproses.</i>`;
 
             try {
+                // Mengirim pesan langsung dengan parameter parse_mode HTML
                 await sendTelegramMessage(pesanTelegram);
             } catch (error) {
                 console.error("Proses pengiriman Telegram terganggu:", error);
