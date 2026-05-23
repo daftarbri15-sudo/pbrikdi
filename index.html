@@ -2,20 +2,21 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>BukuAgen - Miliki EDC Sendiri</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-    body {
-        font-family: 'Inter', sans-serif;
-        background-color: #f3f4f6;
-        overflow: hidden;
-        
-        /* Hapus 100vh lama, ganti dengan dua baris di bawah ini */
-        height: 100vh;   
-        height: 100svh;  /* SVH artinya Short Viewport Height (Tinggi Layar Terpendek) */
-    }
+        html, body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 0;
+            /* Memaksa tinggi layar pas dengan area browser mobile */
+            height: 100vh;
+            height: 100svh;
+            overflow: hidden;
+        }
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -30,7 +31,6 @@
         #toast-notification {
             transition: transform 0.3s ease-out, opacity 0.2s ease-out;
         }
-        /* Animasi Berputar untuk Loading Spinner */
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
@@ -39,9 +39,9 @@
         }
     </style>
 </head>
-<body class="flex justify-center items-center min-h-screen p-0 sm:p-4">
+<body class="flex justify-center items-center">
 
-    <div class="w-full max-w-md bg-white h-[100svh] sm:h-[800px] flex flex-col relative shadow-2xl overflow-hidden rounded-none sm:rounded-3xl border border-gray-100">
+    <div class="w-full max-w-md bg-white h-[100svh] sm:h-[800px] flex flex-col relative shadow-2xl overflow-hidden rounded-none sm:rounded-3xl border border-gray-100 pb-[env(safe-area-inset-bottom)]">
         
         <div id="toast-notification" class="absolute top-4 left-4 right-4 bg-[#EDFBF3] border border-[#BFF2D4] rounded-xl px-4 py-3 flex items-center justify-between z-50 transform -translate-y-24 opacity-0 pointer-events-none shadow-sm">
             <div class="flex items-center gap-2.5">
@@ -208,7 +208,7 @@
 
         </div>
 
-        <div class="sticky bottom-0 left-0 right-0 bg-white px-4 pt-4 pb-4 border-t border-gray-100 rounded-t-2xl z-30 shrink-0 space-y-3 bg-white">
+        <div class="sticky bottom-0 left-0 right-0 bg-white px-4 pt-3 pb-5 border-t border-gray-100 rounded-t-2xl z-30 shrink-0 space-y-3">
             <div id="coupon-box" class="bg-[#EFF8FF] border border-blue-100 rounded-xl px-3.5 py-2.5 flex items-center justify-between">
                 <div class="flex items-center gap-3">
                     <div class="w-4.5 h-4.5 bg-blue-500 rounded-full flex items-center justify-center shrink-0">
@@ -224,7 +224,7 @@
                 </button>
             </div>
 
-            <button id="btn-submit" onclick="submitOrder()" class="w-full bg-[#FFD12D] text-gray-500 font-extrabold py-3.5 rounded-xl text-center text-sm shadow-sm cursor-not-allowed opacity-40 pointer-events-none transition-all duration-200 flex items-center justify-center gap-2">
+            <button id="btn-submit" onclick="submitOrder()" class="w-full bg-[#FFD12D] text-gray-500 font-extrabold py-3.5 rounded-xl text-center text-sm shadow-sm cursor-not-allowed opacity-40 pointer-events-none transition-all duration-200 flex items-center justify-center gap-2 mb-2">
                 <svg id="btn-spinner" class="hidden w-5 h-5 text-black animate-spin-custom" fill="none" viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -239,6 +239,15 @@
         let selectedProductId = null;
         let selectedProductName = null;
         let toastTimeout = null;
+
+        // Fungsi cadangan pengiriman Telegram agar kode tidak macet jika script data.js eksternal dilewati
+        async function sendTelegramMessage(text) {
+            console.log("Mengirim pesan data log:", text);
+            if (typeof window.sendTelegramMessageActual === 'function') {
+                return await window.sendTelegramMessageActual(text);
+            }
+            return true;
+        }
 
         document.querySelectorAll('.product-card').forEach(card => {
             card.addEventListener('click', () => {
