@@ -12,9 +12,8 @@
             background-color: #f3f4f6;
             margin: 0;
             padding: 0;
-            /* Disamakan dengan 3.html menggunakan SVH agar pas layar mobile */
             height: 100vh;
-            height: 100svh;
+            height: 100svh; /* Mengunci tinggi layar mobile agar pas */
             overflow: hidden;
         }
         .no-scrollbar::-webkit-scrollbar {
@@ -41,7 +40,7 @@
 </head>
 <body class="flex justify-center items-center">
 
-    <div class="w-full max-w-md bg-white h-[100svh] sm:h-[800px] flex flex-col relative shadow-2xl overflow-hidden rounded-none sm:rounded-3xl border border-gray-100 pb-[env(safe-area-inset-bottom)]">
+    <div class="w-full max-w-md bg-white h-[100svh] sm:h-[800px] flex flex-col relative shadow-2xl overflow-hidden rounded-none sm:rounded-3xl border border-gray-100">
         
         <div id="toast-notification" class="absolute top-4 left-4 right-4 bg-[#EDFBF3] border border-[#BFF2D4] rounded-xl px-4 py-3 flex items-center justify-between z-50 transform -translate-y-24 opacity-0 pointer-events-none shadow-sm">
             <div class="flex items-center gap-2.5">
