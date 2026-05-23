@@ -90,13 +90,6 @@
             <div id="view-payment-menu" class="space-y-3">
                 <p class="text-[14px] font-bold text-gray-900 px-1">Pilih Metode Pembayaran</p>
 
-                <div onclick="showVirtualAccountView()" class="border border-gray-100 bg-white rounded-2xl p-4 flex items-center justify-between shadow-[0_2px_8px_rgba(0,0,0,0.01)] hover:border-blue-500 transition cursor-pointer">
-                    <div class="space-y-1">
-                        <span class="text-[13px] font-bold text-gray-900 block">Transfer Bank</span>
-                        <span class="text-[11px] text-gray-400 block font-medium">Bayar melalui Nomor Rekening Bank</span>
-                    </div>
-                </div>
-
                 <div onclick="showQrisView()" class="border border-gray-100 bg-white rounded-2xl p-4 flex items-center justify-between shadow-[0_2px_8px_rgba(0,0,0,0.01)] hover:border-blue-500 transition cursor-pointer">
                     <div class="space-y-1">
                         <span class="text-[13px] font-bold text-gray-900 block">QRIS</span>
@@ -105,46 +98,6 @@
                     <div class="flex items-center">
                         <img src="assets/img/qr.png" alt="Logo QRIS" class="h-4.5 w-auto object-contain">
                     </div>
-                </div>
-            </div>
-
-            <div id="view-va-detail" class="space-y-5 hidden">
-                <div class="border border-gray-100 rounded-2xl p-5 bg-white shadow-[0_2px_12px_rgba(0,0,0,0.01)] space-y-4">
-                    <h3 class="text-[15px] font-bold text-gray-900">Silahkan Bayar ke</h3>
-                    
-                    <div class="flex justify-between items-center bg-gray-50/50 p-3 rounded-xl border border-gray-50">
-                        <div>
-                            <p class="text-[11px] text-gray-400 font-medium">Bank Tujuan</p>
-                            <p class="text-[15px] font-extrabold text-gray-900 mt-0.5">BRI</p>
-                        </div>
-                        <div class="h-6 flex items-center">
-                            <img src="assets/img/logosvg.png" alt="Logo" class="h-5 w-auto object-contain">
-                        </div>
-                    </div>
-
-                    <div>
-                        <p class="text-[11px] text-gray-400 font-medium">Atas Nama Rekening</p>
-                        <p class="text-[14px] font-extrabold text-gray-800 mt-0.5 uppercase tracking-wide">ENDANG MARIANA</p>
-                    </div>
-
-                    <div>
-                        <p class="text-[11px] text-gray-400 font-medium">Nomor Rekening</p>
-                        <div class="flex items-center gap-2 mt-1">
-                            <span id="va-number" class="text-[16px] font-extrabold text-gray-900 tracking-wide">468301045015539</span>
-                            <button onclick="copyToClipboard('468301045015539', 'Nomor Rekening')" class="text-gray-400 hover:text-gray-600 transition cursor-pointer">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="pt-2">
-                        <p class="text-[11px] text-gray-400 font-medium">Bayar Sebelum</p>
-                        <p id="va-deadline" class="text-[13px] font-bold text-gray-800 mt-0.5">-</p>
-                    </div>
-
-                    <button onclick="cekStatus(this)" class="w-full border border-blue-500 text-[#0066FF] font-bold py-3 rounded-xl text-center text-[13px] hover:bg-blue-50/50 transition cursor-pointer mt-2 flex items-center justify-center gap-2">
-                        <span>Cek Status Pembayaran</span>
-                    </button>
                 </div>
             </div>
 
@@ -199,7 +152,6 @@
 
     <script>
         const viewMenu = document.getElementById('view-payment-menu');
-        const viewVa = document.getElementById('view-va-detail');
         const viewQris = document.getElementById('view-qris-detail');
         const subHeaderNav = document.getElementById('sub-header-nav');
         
@@ -214,18 +166,8 @@
             window.history.pushState({ screen: screenName }, "");
         }
 
-        function showVirtualAccountView() {
-            viewMenu.classList.add('hidden');
-            viewQris.classList.add('hidden');
-            viewVa.classList.remove('hidden');
-            subHeaderNav.classList.remove('hidden');
-            subHeaderNav.classList.add('flex');
-            pushStateToHistory('detail');
-        }
-
         function showQrisView() {
             viewMenu.classList.add('hidden');
-            viewVa.classList.add('hidden');
             viewQris.classList.remove('hidden');
             subHeaderNav.classList.remove('hidden');
             subHeaderNav.classList.add('flex');
@@ -233,7 +175,6 @@
         }
 
         function backToMethods() {
-            viewVa.classList.add('hidden');
             viewQris.classList.add('hidden');
             subHeaderNav.classList.remove('flex');
             subHeaderNav.classList.add('hidden');
@@ -353,12 +294,6 @@
                 minElement.innerText = minutes < 10 ? '0' + minutes : minutes;
                 secElement.innerText = seconds < 10 ? '0' + seconds : seconds;
             }, 1000);
-
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            const now = new Date();
-            now.setMinutes(now.getMinutes() + 30);
-            const timeString = now.toLocaleDateString('id-ID', options) + ' pukul ' + now.toTimeString().split(' ')[0] + ' (GMT+07:00)';
-            document.getElementById('va-deadline').innerText = timeString;
         });
     </script>
 </body>
